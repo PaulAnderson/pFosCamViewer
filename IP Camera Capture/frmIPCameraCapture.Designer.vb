@@ -67,7 +67,7 @@ Partial Class frmIPCameraCapture
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.GetSettingsButton = New System.Windows.Forms.Button()
         Me.DownButton = New System.Windows.Forms.Button()
         Me.IROffButton = New System.Windows.Forms.Button()
         Me.RightButton = New System.Windows.Forms.Button()
@@ -75,6 +75,15 @@ Partial Class frmIPCameraCapture
         Me.UpButton = New System.Windows.Forms.Button()
         Me.IROnButton = New System.Windows.Forms.Button()
         Me.RebootButton = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtFosCamID = New System.Windows.Forms.TextBox()
+        Me.txtAlias = New System.Windows.Forms.TextBox()
+        Me.txtAppVer = New System.Windows.Forms.TextBox()
+        Me.txtSysVer = New System.Windows.Forms.TextBox()
         Me.GroupBox2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.MainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,6 +103,7 @@ Partial Class frmIPCameraCapture
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'GroupBox2
@@ -510,7 +520,8 @@ Partial Class frmIPCameraCapture
         '
         'GroupBox4
         '
-        Me.GroupBox4.Controls.Add(Me.Button5)
+        Me.GroupBox4.Controls.Add(Me.TableLayoutPanel1)
+        Me.GroupBox4.Controls.Add(Me.GetSettingsButton)
         Me.GroupBox4.Controls.Add(Me.DownButton)
         Me.GroupBox4.Controls.Add(Me.IROffButton)
         Me.GroupBox4.Controls.Add(Me.RightButton)
@@ -525,14 +536,14 @@ Partial Class frmIPCameraCapture
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "FosCam Tools"
         '
-        'Button5
+        'GetSettingsButton
         '
-        Me.Button5.Location = New System.Drawing.Point(206, 107)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(52, 23)
-        Me.Button5.TabIndex = 0
-        Me.Button5.Text = "Down"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.GetSettingsButton.Location = New System.Drawing.Point(478, 107)
+        Me.GetSettingsButton.Name = "GetSettingsButton"
+        Me.GetSettingsButton.Size = New System.Drawing.Size(52, 23)
+        Me.GetSettingsButton.TabIndex = 0
+        Me.GetSettingsButton.Text = "Down"
+        Me.GetSettingsButton.UseVisualStyleBackColor = True
         '
         'DownButton
         '
@@ -597,6 +608,93 @@ Partial Class frmIPCameraCapture
         Me.RebootButton.Text = "Reboot"
         Me.RebootButton.UseVisualStyleBackColor = True
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 2
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.5!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.5!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Label9, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label12, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label11, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtFosCamID, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Label10, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtAlias, 1, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtAppVer, 1, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.txtSysVer, 1, 3)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(226, 20)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 4
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(200, 100)
+        Me.TableLayoutPanel1.TabIndex = 1
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(3, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(59, 13)
+        Me.Label9.TabIndex = 0
+        Me.Label9.Text = "FosCam ID"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(3, 78)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(46, 13)
+        Me.Label10.TabIndex = 0
+        Me.Label10.Text = "Sys_Ver"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(3, 52)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(48, 13)
+        Me.Label11.TabIndex = 0
+        Me.Label11.Text = "App_Ver"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(3, 26)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(29, 13)
+        Me.Label12.TabIndex = 0
+        Me.Label12.Text = "Alias"
+        '
+        'txtFosCamID
+        '
+        Me.txtFosCamID.Location = New System.Drawing.Point(102, 3)
+        Me.txtFosCamID.Name = "txtFosCamID"
+        Me.txtFosCamID.Size = New System.Drawing.Size(95, 20)
+        Me.txtFosCamID.TabIndex = 4
+        '
+        'txtAlias
+        '
+        Me.txtAlias.Location = New System.Drawing.Point(102, 29)
+        Me.txtAlias.Name = "txtAlias"
+        Me.txtAlias.Size = New System.Drawing.Size(95, 20)
+        Me.txtAlias.TabIndex = 4
+        '
+        'txtAppVer
+        '
+        Me.txtAppVer.Location = New System.Drawing.Point(102, 55)
+        Me.txtAppVer.Name = "txtAppVer"
+        Me.txtAppVer.Size = New System.Drawing.Size(95, 20)
+        Me.txtAppVer.TabIndex = 4
+        '
+        'txtSysVer
+        '
+        Me.txtSysVer.Location = New System.Drawing.Point(102, 81)
+        Me.txtSysVer.Name = "txtSysVer"
+        Me.txtSysVer.Size = New System.Drawing.Size(95, 20)
+        Me.txtSysVer.TabIndex = 4
+        '
         'frmIPCameraCapture
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -635,6 +733,8 @@ Partial Class frmIPCameraCapture
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -689,6 +789,15 @@ Partial Class frmIPCameraCapture
     Friend WithEvents IROnButton As System.Windows.Forms.Button
     Friend WithEvents RebootButton As System.Windows.Forms.Button
     Friend WithEvents RightButton As System.Windows.Forms.Button
-    Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents GetSettingsButton As System.Windows.Forms.Button
+    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents Label11 As System.Windows.Forms.Label
+    Friend WithEvents txtFosCamID As System.Windows.Forms.TextBox
+    Friend WithEvents Label10 As System.Windows.Forms.Label
+    Friend WithEvents txtAlias As System.Windows.Forms.TextBox
+    Friend WithEvents txtAppVer As System.Windows.Forms.TextBox
+    Friend WithEvents txtSysVer As System.Windows.Forms.TextBox
 
 End Class

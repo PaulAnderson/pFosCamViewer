@@ -24,6 +24,12 @@ Public Class frmIPCameraCapture
         URL = GetURLFromSettings()
         Timer2.Start()
 
+        Dim cameraSettings As Dictionary(Of String, String) = GetCameraSettings()
+        If cameraSettings.ContainsKey("id") Then txtFosCamID.Text = cameraSettings("id")
+        If cameraSettings.ContainsKey("alias") Then txtAlias.Text = cameraSettings("alias")
+        If cameraSettings.ContainsKey("sys_ver") Then txtSysVer.Text = cameraSettings("sys_ver")
+        If cameraSettings.ContainsKey("app_ver") Then txtAppVer.Text = cameraSettings("app_ver")
+
     End Sub
 
     Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles IROnButton.Click
@@ -112,6 +118,9 @@ Public Class frmIPCameraCapture
     Private Function GetRebootURLFromSettings() As String
         Return GetCgiURLFromSettings("reboot")
     End Function
+    Private Function GetStatusURLFromSettings() As String
+        Return GetCgiURLFromSettings("get_status")
+    End Function
 
     Private Sub CameraTypeFosCamRadioButton_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CameraTypeFosCamRadioButton.CheckedChanged
         Select Case True
@@ -148,7 +157,28 @@ Public Class frmIPCameraCapture
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
         Timer2.Interval = 1000 / 20
     End Sub
-
+    Private Function GetCameraSettings() As Dictionary(Of String, String)
+        Dim keyValues As New Dictionary(Of String, String)
+        Dim url As String = GetStatusURLFromSettings()
+        Dim webclient As New System.Net.WebClient
+        Dim result As String = webclient.DownloadString(url)
+        Dim resultLines() As String = result.Split(vbLf)
+        For Each line As String In resultLines
+            Dim keyStartIndex As Integer = line.IndexOf("var") + 4
+            If line.Length - 1 > keyStartIndex Then
+                line = line.Substring(keyStartIndex)
+                Dim lineParts() As String = line.Split("="c)
+                If lineParts.Length > 1 Then
+                    Dim newKey As String = lineParts(0)
+                    Dim value As String = lineParts(1)
+                    If value.EndsWith(";"c) Then value = value.Substring(0, value.Length - 1) 'remove ;
+                    If value.StartsWith("'"c) AndAlso value.EndsWith("'"c) Then value = value.Substring(1, value.Length - 2) 'remove single quotes
+                    If Not keyValues.ContainsKey(newKey) Then keyValues.Add(newKey, value)
+                End If
+            End If
+        Next
+        Return keyValues
+    End Function
     Private Sub RebootButton_Click(sender As System.Object, e As System.EventArgs) Handles RebootButton.Click
         Dim url As String = GetRebootURLFromSettings()
         Dim webclient As New System.Net.WebClient
@@ -252,6 +282,5 @@ Public Class frmIPCameraCapture
         right = 6
     End Enum
 
-   
- 
+     
 End Class
